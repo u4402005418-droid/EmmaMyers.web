@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Emma Myers — Fan Site</title>
+  <meta name="description" content="Sito fan dedicato a Emma Myers — bio, filmografia, galleria e contatti pubblici." />
+  <link rel="icon" href="data:," />
+  <style>
+    /* ===== Reset & base ===== */
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #7dd3fc;
+      --glass: rgba(255,255,255,0.03);
+      --radius: 12px;
+      --maxw: 1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: linear-gradient(180deg,#071022 0%, #071827 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px;
+      display:flex;
+      justify-content:center;
+      font-size:16px;
+    }
+    .wrap{
+      width:100%;
+      max-width:var(--maxw);
+    }
+
+    /* ===== Header / Nav ===== */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:28px;
+    }
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo {
+      width:56px;height:56px;border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),#8b5cf6);
+      display:flex;align-items:center;justify-content:center;font-weight:700;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+    nav ul{list-style:none;margin:0;padding:0;display:flex;gap:12px}
+    nav a{
+      color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;
+      transition:all .18s ease;
+    }
+    nav a:hover{color:var(--accent);background:var(--glass)}
+
+    /* ===== Hero ===== */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr 380px;
+      gap:24px;
+      align-items:start;
+      margin-bottom:28px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .hero-left h1{margin:0 0 8px 0;font-size:28px}
+    .subtitle{color:var(--muted);margin:0 0 14px 0}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:13px}
+
+    /* ===== Profile card ===== */
+    .profile{
+      text-align:center;
+    }
+    .profile img{
+      width:100%;max-width:320px;border-radius:14px;display:block;margin:0 auto 12px;
+      object-fit:cover;height:420px;
+    }
+    .profile h3{margin:6px 0}
+    .socials{display:flex;gap:10px;justify-content:center;margin-top:8px}
+    .socials a{padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);text-decoration:none;color:var(--muted);font-size:14px}
+
+    /* ===== Grid sections ===== */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 340px;
+      gap:24px;
+    }
+    .bio p{line-height:1.6;color: #cfe8ff;}
+    .credits ul{list-style:none;padding:0;margin:0}
+    .credits li{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03);color:var(--muted)}
+    .credits li strong{color:#fff}
+
+    /* ===== Gallery ===== */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:8px;
+    }
+    .gallery img{width:100%;height:140px;object-fit:cover;border-radius:8px;cursor:pointer;display:block}
+
+    /* ===== Footer form ===== */
+    footer{margin-top:28px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .email-btn{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#8b5cf6);color:#041026;font-weight:600;text-decoration:none}
+
+    /* ===== Modal (lightbox) ===== */
+    .modal{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.7);z-index:60;padding:24px;
+    }
+    .modal.show{display:flex}
+    .modal .wrap-img{max-width:100%;max-height:100%}
+    .modal img{max-width:80vw;max-height:80vh;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.8)}
+
+    /* ===== Responsive ===== */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .profile img{height:320px}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:520px){
+      body{padding:18px}
+      .gallery img{height:110px}
+    }
+
+    /* small utility */
+    .muted{color:var(--muted)}
+    button.action{border:0;padding:10px 14px;border-radius:8px;background:transparent;color:var(--accent);cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="wrap" id="site">
+    <header>
+      <a class="brand" href="#top" aria-label="Vai all'inizio">
+        <div class="logo">EM</div>
+        <div>
+          <div style="font-weight:700">Emma Myers</div>
+          <div style="font-size:12px;color:var(--muted)">Fan site</div>
+        </div>
+      </a>
+
+      <nav aria-label="Principale">
+        <ul>
+          <li><a href="#bio">Bios</a></li>
+          <li><a href="#credits">film</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">contacts</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="card hero-left" id="bio">
+          <h1>Emma Myers</h1>
+          <p class="subtitle">Actress • Known for television and film roles • Unofficial fan site</p>
+
+          <div class="tags" aria-hidden="false">
+            <span class="tag">Actress</span>
+            <span class="tag">TV & Film</span>
+            <span class="tag">interviews</span>
+            <span class="tag">gallery</span>
+          </div>
+
+          <hr style="margin:18px 0;border:0;border-top:1px solid rgba(255,255,255,0.03)">
+
+          <div class="bio">
+            <p id="bio-text"></p> <span class="muted">(Emma Myers is a noted American actress, Emma Elizabeth Myers, born on April 2, 2002, in Orlando, Florida, is an American actress. She was homeschooled and did not attend traditional school, developing creative interests and a strong love for film and television from a young age. She made her acting debut in 2010 as a child actress with a small role in the TV series The Glades, and in the same year appeared in the film Letters to God. After a break, she resumed acting in the 2020s with various TV and film roles, reaching international fame in 2022 by playing Enid Sinclair in the Netflix series Wednesday.)</span></p>
+          </div>
+
+        </div>
+
+        <aside class="card profile" aria-labelledby="bio">
+          <img id="profile-img" src="https://preview.redd.it/her-smile-is-so-powerful-v0-3a1k9e8earga1.jpg?auto=webp&amp;s=623df002ba992a0cc9f2bfe04f0e95693b3cabf0" alt="Ritratto di Emma Myers">
+          <h3>Emma Myers</h3>
+          <div class="muted">Actress</div>
+
+          <div class="socials" style="margin-top:12px">
+            <a href="#" id="link-instagram" title="Instagram (https://www.instagram.com/ememyers/)">Instagram</a>
+            <a href="#" id="link-twitter" title="Twitter/X (https://x.com/emmamyersdaily)">X</a>
+            <a href="#" id="link-imdb" title="IMDB (https://www.imdb.com/it/name/nm3528821/)">IMDb</a>
+          </div>
+
+          <div style="margin-top:14px">
+            <a class="email-btn" id="press-btn" href="#" title="Informazioni per la stampa">contacts print</a>
+          </div>
+        </aside>
+      </section>
+
+      <section class="grid">
+        <div class="card credits" id="credits">
+          <h2 style="margin-top:0">Films / Credits</h2>
+          <p class="muted" style="margin-top:4px">public list.</p>
+          <ul style="margin-top:12px">
+            <li><strong>2021</strong> — (girl in the Basement)</li>
+            <li><strong>2022</strong> — (Wednesday) </li>
+            <li><strong>2023</strong> — (family switch)</li>           
+            <li><strong>2024</strong> —( A Good Girl’s Guide to Murder)</li>
+            <li><strong>2025</strong> — (Wednesday part 2) </li> 
+          </ul>
+
+          <hr style="margin:14px 0;border:0;border-top:1px solid rgba(255,255,255,0.03)">
+
+          <h3 style="margin-bottom:6px">Video</h3>
+          <div style="position:relative;padding-top:56.25%;overflow:hidden;border-radius:8px">
+            <!-- Sostituisci `VIDEO_ID` con l'ID di un video YouTube ufficiale -->
+            <iframe id="yt-embed" src="https://www.bing.com/videos/riverview/relatedvideo?&q=emma+myers+interview&&mid=E657AD48" title="YouTube video" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <aside class="card" id="gallery">
+          <h3 style="margin-top:0">Gallery</h3>
+          <p class="muted" style="margin-bottom:10px">Click to enlarge. Use public or licensed images.</p>
+          <div class="gallery" id="gallery-grid" aria-label="Galleria immagini">
+            <!-- Immagini di esempio: sostituire con immagini ufficiali/consentite -->
+            <img src="https://i.pinimg.com/originals/ba/68/62/ba6862b2f54f9e414ce902fd3122b4f8.jpg" alt="Immagine 1" data-full="https://i.pinimg.com/originals/ba/68/62/ba6862b2f54f9e414ce902fd3122b4f8.jpg">
+            <img src="https://i.pinimg.com/originals/5e/0c/d3/5e0cd30378f6c8c20eb7efd5ab3013c0.jpg" alt="Immagine 2" data-full="https://i.pinimg.com/originals/5e/0c/d3/5e0cd30378f6c8c20eb7efd5ab3013c0.jpg">
+            <img src="https://www.peoples.ru/art/cinema/actor/emma_myers/dCy8oJfi7hacC.jpeg" alt="Immagine 3" data-full="https://www.peoples.ru/art/cinema/actor/emma_myers/dCy8oJfi7hacC.jpeg">
+            <img src="https://i.pinimg.com/originals/59/a9/fb/59a9fbaf798850c824fcf456e3c87728.jpg" alt="Immagine 4" data-full="https://i.pinimg.com/originals/59/a9/fb/59a9fbaf798850c824fcf456e3c87728.jpg">
+            <img src="https://i.pinimg.com/736x/a4/01/cd/a401cda7e49e95892bc29522b066b6ca.jpg" alt="Immagine 5" data-full="https://i.pinimg.com/736x/a4/01/cd/a401cda7e49e95892bc29522b066b6ca.jpg">
+            <img src="https://celebmafia.com/wp-content/uploads/2023/07/emma-meyers-photo-shoot-for-netflix-queue-may-2023-1_thumbnail.jpg" alt="Immagine 6" data-full=https://celebmafia.com/wp-content/uploads/2023/07/emma-meyers-photo-shoot-for-netflix-queue-may-2023-1_thumbnail.jpg"">
+          </div>
+        </aside>
+      </section>
+
+      <div class="modal" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="wrap-img" id="lightbox-content">
+        </div>
+          <img src="" alt="Immagine ingrandita">
+      </div>
+      </div>
+    </main>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <small class="muted"></small>
+        <div style="display:flex;gap:8px">
+          <button class="action" id="toggle-theme" aria-pressed="false">Light Mode</button>
+          <button class="action" id="download-btn">Download info (JSON)</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    /***** SCRIPT: interattività e funzionalità *****/
+
+    // ===== Lightbox per galleria =====
+    (function(){
+      const grid = document.getElementById('gallery-grid');
+      const modal = document.getElementById('lightbox');
+      const modalImg = modal.querySelector('img');
+
+      grid.addEventListener('click', (e) => {
+        const img = e.target.closest('img');
+        if(!img) return;
+        const full = img.dataset.full || img.src;
+        modalImg.src = full;
+        modalImg.alt = img.alt || 'Immagine ingrandita';
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden','false');
+      });
+
+      modal.addEventListener('click', (e) => {
+        if(e.target === modal || e.target === modalImg) {
+          modal.classList.remove('show');
+          modal.setAttribute('aria-hidden','true');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && modal.classList.contains('show')) {
+          modal.classList.remove('show');
+          modal.setAttribute('aria-hidden','true');
+        }
+      });
+    })();
+
+    // ===== Toggle tema chiaro/scuro (semplice) =====
+    (function(){
+      const btn = document.getElementById('toggle-theme');
+      const root = document.documentElement;
+      let light = false;
+
+      btn.addEventListener('click', () => {
+        light = !light;
+        if(light){
+          root.style.setProperty('--bg','#f8fafc');
+          root.style.setProperty('--card','#ffffff');
+          root.style.setProperty('--muted','#375766');
+          root.style.setProperty('--accent','#0ea5e9');
+          document.body.style.background = 'linear-gradient(180deg,#f8fafc,#eef2ff)';
+          btn.textContent = 'Modalità Scura';
+          btn.setAttribute('aria-pressed','true');
+          document.body.style.color = '#051126';
+        } else {
+          root.style.removeProperty('--bg');
+          root.style.removeProperty('--card');
+          root.style.removeProperty('--muted');
+          root.style.removeProperty('--accent');
+          document.body.style.background = 'linear-gradient(180deg,#071022,#071827)';
+          btn.textContent = 'Modalità Chiara';
+          btn.setAttribute('aria-pressed','false');
+          document.body.style.color = '';
+        }
+      });
+    })();
+
+    // ===== Scarica dati (JSON) =====
+    (function(){
+      const btn = document.getElementById('download-btn');
+      btn.addEventListener('click', () => {
+        const data = {
+          title: 'Emma Myers — Fan site',
+          bio: document.getElementById('bio-text').innerText,
+          social: {
+            instagram: document.getElementById('link-instagram').href,
+            twitter: document.getElementById('link-twitter').href,
+            imdb: document.getElementById('link-imdb').href
+          },
+          createdAt: new Date().toISOString()
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'emma-myers-site-info.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+    })();
+
+    // ===== Link placeholder: imposta link ufficiali se li hai =====
+    (function(){
+      // Sostituisci gli href qui con URL ufficiali o pubblici
+      document.getElementById('link-instagram').href = 'https://www.instagram.com/emmamyersofficial/';
+      document.getElementById('link-twitter').href = 'https://twitter.com/';
+      document.getElementById('link-imdb').href = 'https://www.imdb.com/';
+      document.getElementById('press-btn').href = '#contact';
+      // aggiorna mailto con indirizzo pubblico/ufficiale se disponibile
+      // document.getElementById('mailto-link').href = 'mailto:ufficio.stampa@example.com?subject=Richiesta%20stampa';
+    })();
+
+    // ===== Migliorie: scroll smooth per link interni =====
+    (function(){
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (ev) => {
+          const href = a.getAttribute('href');
+          if(href === '#') return;
+          const target = document.querySelector(href);
+          if(target){
+            ev.preventDefault();
+            target.scrollIntoView({behavior:'smooth',block:'start'});
+          }
+        });
+      });
+    })();
+
+    // Nota: sostituisci "VIDEO_ID" nell'iframe con l'ID YouTube ufficiale che vuoi mostrare.
+  </script>
+</body>
+</html>

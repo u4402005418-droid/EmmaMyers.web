@@ -1,0 +1,115 @@
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --muted: #9aa4b2;
+  --accent: #7dd3fc;
+  --glass: rgba(255,255,255,0.03);
+  --radius: 12px;
+  font-family: Inter, sans-serif;
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  background: linear-gradient(180deg,#071022,#071827);
+  color: #e6eef6;
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+}
+.wrap {
+  width: 100%;
+  max-width: 1100px;
+}
+header, footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background: linear-gradient(135deg,var(--accent),#8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+nav ul {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+}
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.card {
+  background: rgba(255,255,255,0.02);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+}
+.profile img {
+  width: 100%;
+  border-radius: 14px;
+  height: 420px;
+  object-fit: cover;
+}
+.tags {
+  display: flex;
+  gap: 8px;
+}
+.tag {
+  background: rgba(255,255,255,0.03);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+}
+.gallery img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.video-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+}
+.video-wrapper iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+.modal.show {
+  display: flex;
+}
+.modal img {
+  max-width: 80vw;
+  max-height: 80vh;
+  border-radius: 10px;
+}
